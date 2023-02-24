@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Toast } from "primereact/toast";
 
 export default function Home() {
   return (
