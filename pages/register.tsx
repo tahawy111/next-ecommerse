@@ -12,6 +12,8 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { register } from "@/slices/authSlice";
 import axios from "axios";
+import { getError } from "@/utils/error";
+import { startLoading, stopLoading } from "@/slices/globalSlice";
 
 const Register = () => {
   const toast = useRef<Toast>(null);
@@ -79,6 +81,7 @@ const Register = () => {
       return show("Passwords must be at one lowercase", "warn");
     }
 
+    dispatch(startLoading());
     try {
       const { data } = await axios.post(
         `${baseUrl}/api/auth/register`,
@@ -87,10 +90,10 @@ const Register = () => {
       if (data) {
         show(data.msg, "success");
       }
-    } catch (error: any) {
-      show(error.response.data.msg, "error");
-      // I want to create getError function witch exist on "Code with basir channel"
+    } catch (error) {
+      show(getError(error), "error");
     }
+    dispatch(stopLoading());
   };
   const header = <div className="font-bold mb-3">Pick a password</div>;
   const footer = (

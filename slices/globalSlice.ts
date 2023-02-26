@@ -23,6 +23,6 @@ export const globalSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { startLoading } = globalSlice.actions;
+export const { startLoading, stopLoading } = globalSlice.actions;
 
 export default globalSlice.reducer;
