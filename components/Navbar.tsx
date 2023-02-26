@@ -7,60 +7,82 @@ import Link from "next/link";
 
 const Navbar = () => {
   const router = useRouter();
+  console.log(router);
+  const isActive = (r: string): string =>
+    r === router.pathname ? "active" : "";
   const items = [
     {
-      label: "File",
-      icon: "pi pi-fw pi-file",
-      command: () => router.push("/product"),
-      items: [
-        {
-          label: "New",
-          icon: "pi pi-fw pi-plus",
-          items: [
-            {
-              label: "Bookmark",
-              icon: "pi pi-fw pi-bookmark",
-            },
-            {
-              label: "Video",
-              icon: "pi pi-fw pi-video",
-            },
-          ],
-        },
-        {
-          label: "Delete",
-          icon: "pi pi-fw pi-trash",
-        },
-        {
-          separator: true,
-        },
-        {
-          label: "Export",
-          icon: "pi pi-fw pi-external-link",
-        },
-      ],
+      label: (
+        <div className={`${isActive("/cart") ? "font-bold" : ""}`}>Cart</div>
+      ),
+      icon: (
+        <i
+          className={`pi pi-fw pi-shopping-cart mr-1 ${
+            isActive("/cart") ? "before:font-bold" : ""
+          }`}
+        ></i>
+      ),
+      command: () => router.push("/cart"),
+      // items: [
+      //   {
+      //     label: "New",
+      //     icon: "pi pi-fw pi-plus",
+      //     items: [
+      //       {
+      //         label: "Bookmark",
+      //         icon: "pi pi-fw pi-bookmark",
+      //       },
+      //       {
+      //         label: "Video",
+      //         icon: "pi pi-fw pi-video",
+      //       },
+      //     ],
+      //   },
+      //   {
+      //     label: "Delete",
+      //     icon: "pi pi-fw pi-trash",
+      //   },
+      //   {
+      //     separator: true,
+      //   },
+      //   {
+      //     label: "Export",
+      //     icon: "pi pi-fw pi-external-link",
+      //   },
+      // ],
     },
     {
-      label: "Edit",
-      icon: "pi pi-fw pi-pencil",
-      items: [
-        {
-          label: "Left",
-          icon: "pi pi-fw pi-align-left",
-        },
-        {
-          label: "Right",
-          icon: "pi pi-fw pi-align-right",
-        },
-        {
-          label: "Center",
-          icon: "pi pi-fw pi-align-center",
-        },
-        {
-          label: "Justify",
-          icon: "pi pi-fw pi-align-justify",
-        },
-      ],
+      label: (
+        <div className={`${isActive("/signin") ? "font-bold" : ""}`}>
+          Sign in
+        </div>
+      ),
+      icon: (
+        <i
+          className={`pi pi-fw pi-user mr-1 ${
+            isActive("/signin") ? "before:font-bold" : ""
+          }`}
+        ></i>
+      ),
+      command: () => router.push("/signin"),
+      // items: [
+      //   {
+      //     label: "Left",
+      //     icon: "pi pi-fw pi-align-left",
+      //   },
+      //   {
+      //     label: "Right",
+      //     icon: "pi pi-fw pi-align-right",
+      //   },
+      //   {
+      //     label: "Center",
+      //     icon: "pi pi-fw pi-align-center",
+      //   },
+      //   {
+      //     label: "Justify",
+      //     icon: "pi pi-fw pi-align-justify",
+      //   },
+      // ],
     },
   ];
 
