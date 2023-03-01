@@ -83,11 +83,11 @@ const Register = () => {
 
     dispatch(startLoading());
     try {
-      const { data } = await axios.post(
+      const { data, status } = await axios.post(
         `${baseUrl}/api/auth/register`,
         userData
       );
-      if (data) {
+      if (status === 200) {
         show(data.msg, "success");
       }
     } catch (error) {

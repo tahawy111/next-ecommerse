@@ -63,7 +63,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
     if (validEmail(email)) {
       await sendMail(mailOptions);
       //     const savedUser = await newUser.save();
-      return res.status(201).json({
+      return res.status(200).json({
         msg: "Register success. Please Check Your Email",
         data: newUser,
         active_token,

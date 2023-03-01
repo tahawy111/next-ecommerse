@@ -36,7 +36,7 @@ const Active = () => {
       </Head>
       <div>
         <div
-          className={`flex justify-center items-center mt-36 mx-20 lg:mx-10`}
+          className={`flex justify-center items-center mt-36 mx-10 lg:mx-20`}
         >
           <Image
             src="https://www.linkpicture.com/q/Authentication-cuate.svg"
