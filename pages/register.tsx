@@ -15,9 +15,9 @@ import { getError } from "@/utils/error";
 import { startLoading, stopLoading } from "@/slices/globalSlice";
 import { show } from "@/utils/toast";
 import { toast } from "react-toastify";
+import { BASE_URL } from "./_app";
 
 const Register = () => {
-  const baseUrl = process.env.BASE_URL;
   const initalState = {
     name: "",
     email: "",
@@ -74,7 +74,7 @@ const Register = () => {
     dispatch(startLoading());
     try {
       const { data, status } = await axios.post(
-        `${baseUrl}/api/auth/register`,
+        `${BASE_URL}/api/auth/register`,
         userData
       );
       if (status === 200) {

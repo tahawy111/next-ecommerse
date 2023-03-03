@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { Toast } from "primereact/toast";
 import React, { useEffect, useRef, useState } from "react";
 import { getError } from "@/utils/error";
+import { BASE_URL } from "../_app";
 
 const Active = () => {
   const router = useRouter();
@@ -16,7 +17,7 @@ const Active = () => {
     const activate = async () => {
       try {
         const { data, status } = await axios.post(
-          `${process.env.BASE_URL}/api/auth/active`,
+          `${BASE_URL}/api/auth/active`,
           {
             token,
           }
