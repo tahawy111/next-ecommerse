@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Toast } from "primereact/toast";
 import React, { useEffect, useRef, useState } from "react";
-import { toast } from "react-toastify";
 import { getError } from "@/utils/error";
 
 const Active = () => {
@@ -27,7 +26,6 @@ const Active = () => {
         }
       } catch (error) {
         if (getError(error) !== "Please add your token!") {
-          toast.warn(getError(error));
           setMessage(getError(error));
         }
       }
@@ -67,7 +65,7 @@ const Active = () => {
             </div>
           ) : message ? (
             <div className="text-1xl md:text-2xl lg:text-4xl leading-normal">
-              <span className="text-red-500">{message}</span>
+              <span className="text-rose-600">{message}</span>
               <br />
             </div>
           ) : (
