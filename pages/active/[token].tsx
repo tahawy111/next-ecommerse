@@ -3,13 +3,16 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { Toast } from "primereact/toast";
+import React, { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
+import { getError } from "@/utils/error";
 
 const Active = () => {
   const router = useRouter();
   const { token } = router.query;
-  console.log(token);
   const [status, setStatus] = useState(false);
+  const [message, setMessage] = useState("");
   useEffect(() => {
     const activate = async () => {
       try {
@@ -22,7 +25,12 @@ const Active = () => {
         if (status === 201) {
           setStatus(true);
         }
-      } catch (error) {}
+      } catch (error) {
+        if (getError(error) !== "Please add your token!") {
+          toast.warn(getError(error));
+          setMessage(getError(error));
+        }
+      }
     };
 
     activate();
@@ -56,6 +64,11 @@ const Active = () => {
               </span>
               <br /> You have successfully activated your account.{" "}
               <Link href="/login">Login</Link>
+            </div>
+          ) : message ? (
+            <div className="text-1xl md:text-2xl lg:text-4xl leading-normal">
+              <span className="text-red-500">{message}</span>
+              <br />
             </div>
           ) : (
             <div className="text-1xl md:text-2xl lg:text-4xl leading-normal">

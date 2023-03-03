@@ -21,11 +21,8 @@ const active = async (req: NextApiRequest, res: NextApiResponse) => {
 
   // await newUser.save();
 
-  console.log("in");
-
   try {
     const { token } = req.body;
-    console.log("token", token);
     if (!token) return res.status(403).json({ msg: "Please add your token!" });
     const decoded: any = jwt.verify(
       token,

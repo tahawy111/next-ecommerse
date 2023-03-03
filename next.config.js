@@ -9,6 +9,7 @@ const nextConfig = {
     ACTIVE_TOKEN_SECRET: "4651__565dd7%^ghjjhfg",
     ACCESS_TOKEN_SECRET: "465aaa1_ghjjhfg_5657%^",
     REFRESH_TOKEN_SECRET: "ghjjcchfg_4651_5657%^",
+    TOAST_POSITION: "bottom-right",
   },
 };
 
