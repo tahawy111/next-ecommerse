@@ -7,7 +7,6 @@ import Link from "next/link";
 
 const Navbar = () => {
   const router = useRouter();
-  console.log(router);
   const isActive = (r: string): string =>
     r === router.pathname ? "active" : "";
   const items = [

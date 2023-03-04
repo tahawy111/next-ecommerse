@@ -16,10 +16,6 @@ import Loading from "@/components/Loading";
 import { ToastContainer, Flip } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export const BASE_URL =
-  typeof window !== "undefined" && window.location.origin
-    ? window.location.origin
-    : "";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>

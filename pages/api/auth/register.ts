@@ -24,7 +24,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
     const { name, email, password } = req.body;
 
     if (await User.findOne({ email }))
-      return res.status(403).json({ msg: "User is already exsits." });
+      return res.status(403).json({ msg: "User is already exist." });
 
     const passwordHash = bcrypt.hashSync(password, 12);
     // const newUser = new User({ name, email, password: passwordHash });

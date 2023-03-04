@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { Toast } from "primereact/toast";
 import React, { useEffect, useRef, useState } from "react";
 import { getError } from "@/utils/error";
-import { BASE_URL } from "../_app";
+import { BASE_URL } from "@/utils/globals";
 
 const Active = () => {
   const router = useRouter();

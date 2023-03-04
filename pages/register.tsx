@@ -13,9 +13,9 @@ import { AppDispatch } from "@/store";
 import axios from "axios";
 import { getError } from "@/utils/error";
 import { startLoading, stopLoading } from "@/slices/globalSlice";
-import { show } from "@/utils/toast";
 import { toast } from "react-toastify";
-import { BASE_URL } from "./_app";
+import { validEmail } from "@/utils/valid";
+import { BASE_URL } from "@/utils/globals";
 
 const Register = () => {
   const initalState = {
@@ -28,7 +28,6 @@ const Register = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const [userData, setUserData] = useState(initalState);
-  console.log(userData);
   const handleInputChange = ({ target }: InputChange) => {
     const { name, value } = target;
     setUserData({ ...userData, [name]: value });
@@ -44,12 +43,6 @@ const Register = () => {
   function containsNumbers(str: string) {
     return /[0-9]/.test(str);
   }
-  function validEmail(str: string) {
-    return /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
-      str
-    );
-  }
-
   const handleSubmit = async (e: IFormEvent) => {
     e.preventDefault();
 

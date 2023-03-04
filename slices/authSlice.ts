@@ -1,64 +1,69 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+import { BASE_URL } from "@/utils/globals";
+import Cookie from "js-cookie";
+import { getError } from "@/utils/error";
+import { toast } from "react-toastify";
 
 export interface AuthState {
   loading: boolean;
-  user: any;
+  userInfo: any;
   msg: any;
 }
 
 const initialState: AuthState = {
   loading: false,
-  user: null,
+  userInfo: null,
   msg: null,
 };
 
-const baseUrl = process.env.BASE_URL;
+const baseUrl = BASE_URL;
 
-export const register = createAsyncThunk(
-  "auth/register",
-  async (user: any, thunkAPI) => {
+export const login = createAsyncThunk(
+  "auth/login",
+  async (user: { email: string; password: string }, thunkAPI) => {
     try {
-      const res = await axios.post(`${baseUrl}/api/auth/register`, user);
+      const res = await axios.post(`${baseUrl}/api/auth/login`, user);
+      Cookie.set("refreshtoken", res.data.refresh_token, {
+        path: "/api/auth/accessToken",
+        expires: 7,
+      });
+      localStorage.setItem("firstLogin", JSON.stringify(true));
       return thunkAPI.fulfillWithValue(res.data);
-    } catch (error: any) {
-      const message =
-        (error.response && error.response.data && error.response.data.msg) ||
-        error.msg ||
-        error.toString();
-
-      return thunkAPI.rejectWithValue(message);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(getError(error));
     }
   }
 );
 
 export const authSlice = createSlice({
-  name: "global",
+  name: "auth",
   initialState,
   reducers: {},
   extraReducers: (builder: any) => {
-    builder.addCase(register.pending, (state: AuthState) => {
+    builder.addCase(login.pending, (state: AuthState) => {
       return { ...state, loading: true };
     });
-    builder.addCase(register.fulfilled, (state: AuthState, action: any) => {
+    builder.addCase(login.fulfilled, (state: AuthState, action: any) => {
+      toast.success(action.payload.msg);
+
       return {
         ...state,
         loading: false,
+        userInfo: action.payload,
       };
     });
 
-    builder.addCase(
-      register.rejected,
-      (state: AuthState, action: PayloadAction) => {
-        return {
-          ...state,
-          loading: false,
-          msg: action.payload,
-          user: null,
-        };
-      }
-    );
+    builder.addCase(login.rejected, (state: AuthState, action: any) => {
+      toast.error(action.payload);
+      return {
+        ...state,
+        loading: false,
+        msg: action.payload,
+        user: null,
+      };
+    });
   },
 });
 
