@@ -2,11 +2,8 @@ import connectDB from "../../../utils/connectDB";
 import User from "../../../models/User";
 import { NextApiRequest, NextApiResponse } from "next";
 import jwt from "jsonwebtoken";
-import { BASE_URL } from "@/utils/globals";
 
 connectDB();
-
-const CLIENT_URL = BASE_URL;
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {

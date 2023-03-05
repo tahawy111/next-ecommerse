@@ -7,7 +7,7 @@ import {
   generateRefreshToken,
 } from "@/utils/generateToken";
 import { validEmail } from "@/utils/valid";
-import { BASE_URL } from "@/pages/_app";
+import { BASE_URL } from "@/utils/globals";
 
 connectDB();
 

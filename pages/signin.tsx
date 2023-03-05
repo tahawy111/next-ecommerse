@@ -14,8 +14,23 @@ import { AppDispatch } from "@/store";
 import { login } from "@/slices/authSlice";
 import { startLoading, stopLoading } from "@/slices/globalSlice";
 import { IFormEvent, InputChange } from "@/utils/Typescript";
+import Cookies from "js-cookie";
+// import { setCookie } from "@/utils/globals";
+// function setCookie(
+//   cname: string,
+//   cvalue: string,
+//   exdays: number,
+//   path: string = "/"
+// ) {
+//   const d = new Date();
+//   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+//   let expires = "expires=" + d.toUTCString();
+//   // document.cookie = `${cname}=${cvalue};${expires};path=${path};`;
+//   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=" + path;
+// }
 
 const Signin = () => {
+  const [rfToken, setRfToken] = useState("");
   const dispatch: AppDispatch = useDispatch();
   const handleSubmit = (e: IFormEvent) => {
     e.preventDefault();
@@ -24,8 +39,17 @@ const Signin = () => {
     if (!userData.password) return toast.warning(`Password isn't exist.`);
     if (userData.password.length < 8)
       return toast.warning(`Password must be at least 6 chars.`);
-    dispatch(startLoading);
-    dispatch(login(userData));
+    dispatch(startLoading());
+
+    dispatch(login(userData)).then((state: any) => {
+      setRfToken(state.payload.refresh_token);
+    });
+
+    Cookies.set("refreshtoken", rfToken, {
+      path: "/api/auth/accessToken",
+      expires: 5,
+    });
+
     dispatch(stopLoading());
   };
 

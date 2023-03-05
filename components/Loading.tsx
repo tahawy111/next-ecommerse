@@ -5,6 +5,7 @@ import { RootState } from "@/store";
 
 export default function Loading() {
   const { loading } = useSelector((state: RootState) => state.global);
+  console.log(loading);
   return (
     <div
       className={`${
