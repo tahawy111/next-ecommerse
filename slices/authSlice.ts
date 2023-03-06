@@ -13,12 +13,14 @@ export interface AuthState {
     access_token: string;
     user: IUserModel;
   } | null;
+  isLoggedIn: boolean;
   msg: any;
 }
 
 const initialState: AuthState = {
   loading: false,
   userInfo: null,
+  isLoggedIn: false,
   msg: null,
 };
 
@@ -51,6 +53,7 @@ export const authSlice = createSlice({
       return {
         ...state,
         userInfo: {
+          isLoggedIn: true,
           user: action.payload.user,
           access_token: action.payload.accessToken,
         },
@@ -59,13 +62,14 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder: any) => {
     builder.addCase(login.pending, (state: AuthState) => {
-      return { ...state, loading: true };
+      return { ...state, loading: true, isLoggedIn: false };
     });
     builder.addCase(login.fulfilled, (state: AuthState, action: any) => {
       toast.success(action.payload.msg);
 
       return {
         ...state,
+        isLoggedIn: true,
         loading: false,
         userInfo: {
           user: action.payload.user,

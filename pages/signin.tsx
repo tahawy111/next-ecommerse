@@ -32,7 +32,7 @@ import Cookies from "js-cookie";
 const Signin = () => {
   const [rfToken, setRfToken] = useState("");
   const dispatch: AppDispatch = useDispatch();
-  const handleSubmit = (e: IFormEvent) => {
+  const handleSubmit = async (e: IFormEvent) => {
     e.preventDefault();
     if (!userData.email) return toast.warning(`Email isn't exist.`);
     if (!validEmail(userData.email)) return toast.warning(`Email isn't valid`);
@@ -41,14 +41,7 @@ const Signin = () => {
       return toast.warning(`Password must be at least 6 chars.`);
     dispatch(startLoading());
 
-    dispatch(login(userData)).then((state: any) => {
-      setRfToken(state.payload.refresh_token);
-    });
-
-    Cookies.set("refreshtoken", rfToken, {
-      path: "/api/auth/accessToken",
-      expires: 5,
-    });
+    await dispatch(login(userData));
 
     dispatch(stopLoading());
   };

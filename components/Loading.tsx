@@ -5,22 +5,17 @@ import { RootState } from "@/store";
 
 export default function Loading() {
   const { loading } = useSelector((state: RootState) => state.global);
-  console.log(loading);
   return (
     <div
       className={`${
-        loading ? "flex" : "hidden"
+        true ? "flex" : "hidden"
       } fixed w-full h-screen text-center justify-center items-center text-white top-0 left-0 z-[1]`}
       style={{
         background: "#0007",
       }}
     >
-      <ProgressSpinner
-        style={{ width: "70px", height: "70px" }}
-        strokeWidth="5"
-        fill="var(--surface-ground)"
-        animationDuration=".5s"
-      />
+      <div className="w-16 h-16 rounded-full p-3 border-black border-8"></div>
+      <div className="w-16 h-16 rounded-full border-gray-100 border-8 border-t-transparent"></div>
     </div>
   );
 }
