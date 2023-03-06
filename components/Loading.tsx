@@ -8,14 +8,13 @@ export default function Loading() {
   return (
     <div
       className={`${
-        true ? "flex" : "hidden"
+        loading ? "flex" : "hidden"
       } fixed w-full h-screen text-center justify-center items-center text-white top-0 left-0 z-[1]`}
       style={{
         background: "#0007",
       }}
     >
-      <div className="w-16 h-16 rounded-full p-3 border-black border-8"></div>
-      <div className="w-16 h-16 rounded-full border-gray-100 border-8 border-t-transparent"></div>
+      <div className="w-16 h-16 rounded-full border-gray-100 border-8 border-t-teal-500 animate-spin-fast"></div>
     </div>
   );
 }

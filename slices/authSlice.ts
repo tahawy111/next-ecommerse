@@ -49,11 +49,10 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state: AuthState, action: any) => {
-      console.log(action.payload.accessToken);
       return {
         ...state,
+        isLoggedIn: true,
         userInfo: {
-          isLoggedIn: true,
           user: action.payload.user,
           access_token: action.payload.accessToken,
         },
