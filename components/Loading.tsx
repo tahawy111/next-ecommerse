@@ -10,9 +10,7 @@ export default function Loading() {
       className={`${
         loading ? "flex" : "hidden"
       } fixed w-full h-screen text-center justify-center items-center text-white top-0 left-0 z-[1]`}
-      style={{
-        background: "#0007",
-      }}
+      style={{ background: "#0007" }}
     >
       <div className="w-16 h-16 rounded-full border-gray-100 border-8 border-t-teal-500 animate-spin-fast"></div>
     </div>
