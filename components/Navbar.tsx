@@ -166,7 +166,7 @@ const Navbar = () => {
           {open ? <IoMdClose size={23} /> : <FiMenu size={23} />}
         </div>
 
-        <ul className={`md:flex md:items-center md:pb-0 pb-5 absolute md:static bg-[#f8f9fa] md:z-auto opacity-90 left-0 w-full md:w-auto md:pl-0 ${open ? 'top-16' : 'top-[-490px]'}`}>
+        <ul className={`md:flex md:items-center md:pb-0 pb-5 absolute md:static bg-[#f8f9fa] md:z-auto left-0 w-full md:w-auto md:pl-0 ${open ? 'top-16' : 'top-[-490px]'}`}>
 
           {isLoggedIn ? <>
             <li className="hover:bg-[#e9ecef] px-5 py-1 rounded-lg flex gap-x-2 items-center active:bg-gray-200">
