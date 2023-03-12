@@ -8,10 +8,10 @@ export const generateActiveToken = (payload : object) : string => {
 export const generateAccessToken = (payload : object) : string => {
     return jwt.sign(payload, `${
         process.env.ACCESS_TOKEN_SECRET
-    }`, {expiresIn: "1m"});
+    }`, {expiresIn: "30d"});
 };
 export const generateRefreshToken = (payload : object) : string => {
     return jwt.sign(payload, `${
         process.env.REFRESH_TOKEN_SECRET
-    }`, {expiresIn: "1m"});
+    }`, {expiresIn: "30d"});
 };

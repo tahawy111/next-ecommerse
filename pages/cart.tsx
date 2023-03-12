@@ -10,7 +10,7 @@ const Cart = () => {
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-            Cart
+            <span className="text-5xl">Cart</span>
         </div>
     );
 };
