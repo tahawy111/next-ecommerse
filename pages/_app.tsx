@@ -20,7 +20,16 @@ import { ChakraProvider } from "@chakra-ui/react";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"></link>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"></link>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+      rel="stylesheet"></link>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+      rel="stylesheet"></link>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone"
+      rel="stylesheet"></link>
       <ChakraProvider>
         <Loading />
 

@@ -12,8 +12,8 @@ const Cart = () => {
             </Head>
             <span className="text-5xl">Cart
             </span>
-            <span className="material-symbols-outlined">
-done
+            <span className="material-icons-sharp">
+info
 </span>
         </div>
     );
