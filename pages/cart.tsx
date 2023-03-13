@@ -12,7 +12,7 @@ const Cart = () => {
             </Head>
             <span className="text-5xl">Cart
             </span>
-            <span className="material-icons-sharp">
+            <span className="material-icons-sharp text-red-800 text-8xl">
 info
 </span>
         </div>

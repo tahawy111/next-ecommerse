@@ -17,19 +17,16 @@ import { ToastContainer, Flip } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ChakraProvider } from "@chakra-ui/react";
 
+// // material icons
+// import 'https://fonts.googleapis.com/icon?family=Material+Icons'
+// import 'https://fonts.googleapis.com/icon?family=Material+Icons+Outlined'
+// import 'https://fonts.googleapis.com/icon?family=Material+Icons+Round'
+// import 'https://fonts.googleapis.com/icon?family=Material+Icons+Sharp'
+// import 'https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone'
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"></link>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
-      rel="stylesheet"></link>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
-      rel="stylesheet"></link>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
-      rel="stylesheet"></link>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone"
-      rel="stylesheet"></link>
       <ChakraProvider>
         <Loading />
 
