@@ -1,3 +1,4 @@
+import Layout from "@/components/Layout";
 import Head from "next/head";
 import React from "react";
 
@@ -10,11 +11,13 @@ const Cart = () => {
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-            <span className="text-5xl">Cart
+<Layout>
+<span className="text-5xl">Cart
             </span>
             <span className="material-icons-sharp text-red-800 text-8xl">
 info
 </span>
+</Layout>
         </div>
     );
 };

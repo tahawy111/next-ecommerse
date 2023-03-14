@@ -26,12 +26,12 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Provider store={store}>
-      <ChakraProvider>
+<Provider store={store}>
         <Loading />
 
-        <Layout>
-          <ToastContainer
+        {/* <Layout> */}
+
+         <ToastContainer
             transition={Flip}
             position="bottom-right"
             autoClose={5000}
@@ -43,10 +43,9 @@ export default function App({ Component, pageProps }: AppProps) {
             draggable={false}
             pauseOnHover
             theme="dark"
-          />
+            /> 
           <Component {...pageProps} />
-        </Layout>
-      </ChakraProvider>
+        {/* </Layout> */}
     </Provider>
   );
 }

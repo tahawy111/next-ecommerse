@@ -15,6 +15,7 @@ import { startLoading, stopLoading } from "@/slices/globalSlice";
 import { IFormEvent, InputChange } from "@/utils/Typescript";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const Signin = () => {
     const [rfToken, setRfToken] = useState("");
@@ -74,34 +75,53 @@ const Signin = () => {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className="flex justify-center my-56 flex-col">
-                <div className="card flex justify-center items-center flex-wrap flex-col">
-                    <h3 className="text-gray-500 text-3xl my-3">Sign in</h3>
-                    <form onSubmit={handleSubmit}
-                        className="flex flex-col gap-6">
-                        <span className="p-float-label">
+            <div className="flex justify-center items-center h-screen flex-col">
+                <p className="text-3xl font-bold mb-3">Welcome To Tahawy Shop</p>
+                <div className="flex">
+                    <Image className="hidden md:block" src="https://www.linkpicture.com/q/undraw_mobile_login_re_9ntv.svg" alt="" width={500} height={500} />
+                    <div className="card flex justify-center items-center flex-wrap flex-col">
+                        <h3 className="text-gray-500 text-3xl my-3">Sign in</h3>
+                        <form onSubmit={handleSubmit}
+                            className="flex flex-col gap-6">
+                            {/* <span className="p-float-label">
                             <InputText id="email" name="email"
                                 className={`w-80`}
                                 onChange={handleInputChange} />
                             <label htmlFor="email">Email</label>
-                        </span>
-                        <span className="p-float-label">
+                        </span> */}
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Your Email</span>
+                                </label>
+                                <input type="text" onChange={handleInputChange} name="email" placeholder="info@site.com" className="input input-bordered w-72" />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Your Password</span>
+                                </label>
+
+                                <input type="password" onChange={handleInputChange} name="password" placeholder="*******" className="input input-bordered w-72" />
+
+                            </div>
+
+                            {/* <span className="p-float-label">
                             <Password id="password" name="password"
                                 onChange={handleInputChange}
                                 toggleMask
                                 feedback={false}
                             />
                             <label htmlFor="password">Password</label>
-                        </span>
-                        {/* <Password className={`w-80`} value={value} onChange={(e) => setValue(e.target.value)} header={header} footer={footer} /> */}
-                        <Button type="submit" label="Sign in" />
-                    </form>
-                    <p className="mt-3">
-                        You don't have an account?{" "}
-                        <Link href="/register" className="text-red-500 font-bold hover:underline">
-                            Register Now
-                        </Link>
-                    </p>
+                        </span> */}
+                            {/* <Password className={`w-80`} value={value} onChange={(e) => setValue(e.target.value)} header={header} footer={footer} /> */}
+                            <button type="submit" className="btn btn-primary">Sign In</button>
+                        </form>
+                        <p className="mt-3">
+                            You don't have an account?{" "}
+                            <Link href="/register" className="text-red-500 font-bold hover:underline">
+                                Register Now
+                            </Link>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
