@@ -16,6 +16,7 @@ import { IFormEvent, InputChange } from "@/utils/Typescript";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Layout from "@/components/Layout";
 
 const Signin = () => {
     const [rfToken, setRfToken] = useState("");
@@ -75,6 +76,7 @@ const Signin = () => {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+            <Layout>
             <div className="flex justify-center items-center h-screen flex-col">
                 <p className="text-3xl font-bold mb-3">Welcome To Tahawy Shop</p>
                 <div className="flex">
@@ -124,6 +126,8 @@ const Signin = () => {
                     </div>
                 </div>
             </div>
+            </Layout>
+
         </div>
     );
 };;

@@ -1,11 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 import Head from "next/head";
 import React, {useRef, useState} from "react";
-import {InputText} from "primereact/inputtext";
 import {Button} from "primereact/button";
 import Link from "next/link";
-import {Password} from "primereact/password";
-import {Divider} from "primereact/divider";
 import {IFormEvent, InputChange} from "@/utils/Typescript";
 import {useDispatch} from "react-redux";
 import {AppDispatch} from "@/store";
@@ -15,6 +12,8 @@ import {startLoading, stopLoading} from "@/slices/globalSlice";
 import {toast} from "react-toastify";
 import {validEmail} from "@/utils/valid";
 import {BASE_URL} from "@/utils/globals";
+import Layout from "@/components/Layout";
+import Image from "next/image";
 
 const Register = () => {
 
@@ -90,27 +89,6 @@ const Register = () => {
         }
         dispatch(stopLoading());
     };
-    const header = <div className="font-bold mb-3">
-        Pick a password
-    </div>;
-    const footer = (
-        <>
-            <Divider/>
-            <p className="mt-2">
-                Suggestions
-            </p>
-            <ul className="pl-2 ml-2 mt-0 line-height-3">
-                <li>At least one lowercase</li>
-                <li>
-                    At least one uppercase
-                </li>
-                <li>At least one numeric</li>
-                <li>
-                    Minimum 8 characters
-                </li>
-            </ul>
-        </>
-    );;
 
     return (
         <div>
@@ -120,40 +98,39 @@ const Register = () => {
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-            <div className="flex justify-center my-40 flex-col">
+            <Layout>
+            <div className="flex justify-center">
+            <Image className="hidden md:block" src="https://www.linkpicture.com/q/undraw_sign_up_nm4k.svg" alt="" width={500} height={500} />
+            <div className="flex justify-center items-center h-screen flex-col">
                 <div className="card flex justify-center items-center flex-wrap flex-col">
                     <h3 className="text-gray-500 text-3xl my-3">Register</h3>
                     <form onSubmit={handleSubmit}
                         className="flex flex-col gap-6">
-                        <span className="p-float-label">
-                            <InputText id="name" name="name"
-                                maxLength={20}
-                                className={`w-80`}
-                                onChange={handleInputChange}/>
-                            <label htmlFor="name">Name</label>
-                        </span>
-                        <span className="p-float-label">
-                            <InputText id="email" name="email"
-                                className={`w-80`}
-                                onChange={handleInputChange}/>
-                            <label htmlFor="email">Email</label>
-                        </span>
-                        <span className="p-float-label">
-                            <Password id="password" name="password"
-                                onChange={handleInputChange}
-                                toggleMask
-                                header={header}
-                                footer={footer}/>
-                            <label htmlFor="password">Password</label>
-                        </span>
-                        <span className="p-float-label">
-                            <Password id="confirmPassword" name="confirmPassword"
-                                onChange={handleInputChange}
-                                header={header}
-                                footer={footer}
-                                toggleMask/>
-                            <label htmlFor="confirmPassword">Confirm Password</label>
-                        </span>
+      
+                        <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Your Name</span>
+                                </label>
+                                <input type="text" onChange={handleInputChange} name="name" placeholder="Ali" className="input input-bordered w-72" />
+                            </div>
+                        <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Your Email</span>
+                                </label>
+                                <input type="email" onChange={handleInputChange} name="email" placeholder="info@site.com" className="input input-bordered w-72" />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Your Password</span>
+                                </label>
+                                <input type="password" onChange={handleInputChange} name="password" placeholder="*******" className="input input-bordered w-72" />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Your Confirm Password</span>
+                                </label>
+                                <input type="password" onChange={handleInputChange} name="confirmPassword" placeholder="*******" className="input input-bordered w-72" />
+                            </div>
                         {/* <Password className={`w-80`} value={value} onChange={(e) => setValue(e.target.value)} header={header} footer={footer} /> */}
                         <Button type="submit" label="Register"/>
                     </form>
@@ -165,6 +142,9 @@ const Register = () => {
                     </p>
                 </div>
             </div>
+            </div>
+
+            </Layout>
         </div>
     );
 };
