@@ -30,23 +30,20 @@ export default function App({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <Loading />
 
-
-
-
-        <ToastContainer
-          transition={Flip}
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar
-          newestOnTop={false}
-          closeOnClick={false}
-          rtl={false}
-          pauseOnFocusLoss
-          draggable={false}
-          pauseOnHover
-          theme="dark"
-        />
-        <Component {...pageProps} />
+      <ToastContainer
+        transition={Flip}
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover
+        theme="dark"
+      />
+      <Component {...pageProps} />
     </Provider>
   );
 }

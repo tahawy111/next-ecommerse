@@ -15,14 +15,8 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import ThemeChanger from "./ThemeChanger";
 
+
 const Navbar = () => {
-  let Links = [
-    { name: "HOME", link: "/" },
-    { name: "SERVICE", link: "/" },
-    { name: "ABOUT", link: "/" },
-    { name: "BLOG'S", link: "/" },
-    { name: "CONTACT", link: "/" },
-  ];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
@@ -78,19 +72,30 @@ const Navbar = () => {
                 dispatch(logout());
                 router.push("/signin");
     } }><a>Logout</a></li>
+    
   </ul>
   
   </div>
     </li>
+<li>
+<span onClick={() => setIsMenuOpen((prev) => !prev)} className="block material-icons-outlined md:hidden cursor-pointer">
+close
+</span>
+</li>
     </> : <>
     <li>{<ThemeChanger  noCenter={isMenuOpen} />}</li>
       <li><Link href={'/signin'}>Sign In</Link></li>
+      <li>
+<span onClick={() => setIsMenuOpen((prev) => !prev)} className="block material-icons-outlined md:hidden cursor-pointer">
+close
+</span>
+</li>
     </>)
 
   return (
   
 
-    <div className="navbar bg-base-100 shadow-md">
+    <div className={`navbar bg-base-100 shadow-md`}>
       <div className="navbar-start">
         <Link href={`/`} className="btn btn-ghost normal-case text-xl">Tahawy Shop</Link>
       </div>
@@ -106,7 +111,7 @@ menu
         {navLinks}
       </ul>
 
-{isMenuOpen &&       <ul className="md:hidden menu px-1 fixed top-[64px] bg-white dark:bg-[#2a303c] w-full shadow-md">
+{isMenuOpen && <ul className="md:hidden menu px-1 fixed top-0 left-0 opacity-95 bg-white dark:bg-[#2a303c] w-80 md:w-96 rounded-lg shadow-md z-[9999]">
         {navLinks}
       </ul>}
  

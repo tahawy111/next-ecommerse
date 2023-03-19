@@ -31,7 +31,7 @@ const Layout: React.FC < IProps > = ({children}) => {
     }, [dispatch]);
     return (
         <div>
-            <Navbar/> {children} </div>
+            <div className="mb-3"><Navbar/></div> {children} </div>
     );
 };
 

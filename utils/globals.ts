@@ -1,7 +1,7 @@
 export const BASE_URL =
   typeof window !== "undefined" && window.location.origin
     ? window.location.origin
-    : "";
+    : process.env.BASE_URL;
 
 // export function setCookie({
 //   cname,

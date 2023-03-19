@@ -1,4 +1,4 @@
-import mongoose, { Model } from "mongoose";
+import  { Model,Schema,model,models } from "mongoose";
 
 export interface IUserModel {
   name: string;
@@ -13,7 +13,7 @@ export interface IUserModel {
 
 type UserModel = Model<IUserModel, {}>;
 
-const userSchema = new mongoose.Schema<IUserModel, UserModel>(
+const userSchema = new Schema<IUserModel, UserModel>(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
@@ -30,6 +30,6 @@ const userSchema = new mongoose.Schema<IUserModel, UserModel>(
 );
 
 const Dataset: UserModel =
-  mongoose.models.user || mongoose.model("user", userSchema);
+  models.user || model("user", userSchema);
 
 export default Dataset;
