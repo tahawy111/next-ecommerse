@@ -31,7 +31,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <Loading />
 
 
-      <ThemeProvider attribute="class">
 
 
         <ToastContainer
@@ -48,7 +47,6 @@ export default function App({ Component, pageProps }: AppProps) {
           theme="dark"
         />
         <Component {...pageProps} />
-      </ThemeProvider>
     </Provider>
   );
 }

@@ -106,7 +106,7 @@ menu
         {navLinks}
       </ul>
 
-{isMenuOpen &&       <ul className="md:hidden menu px-1 fixed top-[64px] bg-[#2a303c] w-full shadow-md">
+{isMenuOpen &&       <ul className="md:hidden menu px-1 fixed top-[64px] bg-white dark:bg-[#2a303c] w-full shadow-md">
         {navLinks}
       </ul>}
  

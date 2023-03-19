@@ -1,3 +1,4 @@
+import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react'
 import { themeChange } from 'theme-change'
 import useLocalStorage from 'use-local-storage'
@@ -16,7 +17,6 @@ const ThemeChanger:React.FC<Props> = ({noCenter}) => {
             setTheme(window.localStorage.theme)
     }, [])
 
-    console.log(theme)
 
     return (
         <label className={`swap swap-rotate swap-on place-content-start md:place-content-center`}>
@@ -31,7 +31,8 @@ const ThemeChanger:React.FC<Props> = ({noCenter}) => {
 
                 <span data-set-theme="dark" className="swap-off material-icons-outlined">
                     light_mode
-                </span></> : <>
+                </span>
+                </> : <>
 
 
                 <span data-set-theme="dark" className="swap-on material-icons-outlined">
