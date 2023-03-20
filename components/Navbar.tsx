@@ -22,29 +22,6 @@ const Navbar = () => {
   const router = useRouter();
   const { isLoggedIn, userInfo } = useSelector((state: RootState) => state.auth);
   const isActive = (r: string): string => r === router.pathname ? "active" : "";
-  const menu = useRef<Menu>(null);
-  const items: MenuItem[] = [{
-    label: "Options",
-    items: [
-      {
-        label: "Profile",
-        icon: <BsFillPersonFill className="mr-3" />,
-        command: () => {
-          router.push("/");
-        }
-      }, {
-        label: "Logout",
-        icon: "pi pi-fw pi-power-off",
-        command: () => {
-          Cookies.remove("refreshtoken", { path: "api/auth/accessToken" });
-          localStorage.removeItem("firstLogin");
-          dispatch(logout());
-          router.push("/signin");
-        }
-      },
-    ]
-  },];
-  
   const navLinks = (isLoggedIn ? 
     <>
           <li>{<ThemeChanger noCenter={isMenuOpen} />}</li>
@@ -58,7 +35,7 @@ const Navbar = () => {
       <img src={userInfo?.user.avatar}/>
     </div>
   </label>
-  <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+  <ul tabIndex={0} className="mt-40 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
     <li>
       <a className="justify-between">
         Profile

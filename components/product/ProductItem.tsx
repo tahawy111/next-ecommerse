@@ -1,4 +1,5 @@
 import { IProductModel } from '@/models/Product'
+import Link from 'next/link';
 import React from 'react'
 interface IProps {
     product: IProductModel;
@@ -19,7 +20,7 @@ const ProductItem = ({ product }: IProps) => {
                 </div>
                 <p>{product.description}</p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-outline btn-accent">View</button>
+                    <Link href={`/product/${product._id}`} className="btn btn-outline btn-accent">View</Link>
                     <button className="btn btn-primary">Buy Now</button>
                 </div>
             </div>

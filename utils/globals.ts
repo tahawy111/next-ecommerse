@@ -3,19 +3,7 @@ export const BASE_URL =
     ? window.location.origin
     : process.env.BASE_URL;
 
-// export function setCookie({
-//   cname,
-//   cvalue,
-//   path = "/",
-//   exdays,
-// }: {
-//   cname: string;
-//   cvalue: string;
-//   path?: string;
-//   exdays: number;
-// }): void {
-//   const d = new Date();
-//   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-//   let expires = "expires=" + d.toUTCString();
-//   document.cookie = `${cname}=${cvalue};${expires};path=${path};`;
-// }
+
+export const capitalize = (sentence: string) => {
+  return sentence.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")
+};

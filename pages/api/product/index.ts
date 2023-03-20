@@ -1,6 +1,5 @@
 import connectDB from "../../../utils/connectDB";
 import { NextApiRequest, NextApiResponse } from "next";
-import jwt from "jsonwebtoken";
 import Product from "@/models/Product";
 
 connectDB();

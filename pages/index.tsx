@@ -22,7 +22,7 @@ export default function Home(props:IProps){
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Layout>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">{products.length === 0 ? <h1 className="text-3xl font-bold underline">No Products!</h1> :products.map((product:IProductModel) => (<ProductItem key={product._id} product={product} />))}</div>
+                <div className="grid justify-items-center grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">{products.length === 0 ? <h1 className="text-3xl font-bold underline">No Products!</h1> :products.map((product:IProductModel) => (<ProductItem key={product._id} product={product} />))}</div>
             </Layout>
         </>
     );
