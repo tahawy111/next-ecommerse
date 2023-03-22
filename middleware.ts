@@ -17,9 +17,9 @@ export async function middleware(req : NextRequest) {
         return NextResponse.redirect(new URL('/', req.url))
     }
 
-    if (! verifiedToken) {
-        return NextResponse.redirect(new URL('/signin', req.url))
-    }
+    // if (! verifiedToken) {
+    //     return NextResponse.redirect(new URL('/signin', req.url))
+    // }
 }
 
 
