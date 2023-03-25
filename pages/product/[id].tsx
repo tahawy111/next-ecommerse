@@ -24,7 +24,7 @@ const DetailProduct = ({ product }: IProps) => {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
 
-            <div className='grid grid-cols-2 gap-x-3'>
+            <div className='grid grid-cols-1 gap-x-3 md:grid-cols-2'>
                 <div className="grid">
 
                     <div className={`w-[600px]`}>
@@ -44,7 +44,9 @@ const DetailProduct = ({ product }: IProps) => {
                         </div>
                     </div>
                 </div>
-                <div className="">Hello</div>
+                <div className="mt-3">
+                    <h2 className='text-4xl uppercase font-semibold'>{product.title}</h2>
+                </div>
             </div>
 
         </Layout>
