@@ -24,12 +24,12 @@ const DetailProduct = ({ product }: IProps) => {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
 
-            <div className='grid grid-cols-1 gap-x-3 md:grid-cols-2'>
+            <div className='grid grid-cols-1 gap-x-3 xl:grid-cols-2'>
                 <div className="grid">
 
-                    <div className={`w-[600px]`}>
-                        <img className='border border-[#ddd] rounded-lg p-1 w-full h-[520px]' src={product.images[imgIndex].url} alt={product.images[imgIndex].url} />
-                        <div className={`flex mx-3 items-center justify-center`}>
+                    <div className={``}>
+                        <img className='border border-[#ddd] rounded-lg p-1 w-full object-contain h-[520px]' src={product.images[imgIndex].url} alt={product.images[imgIndex].url} />
+                        <div className={`flex m-3 items-center justify-center`}>
                             <span className={`material-icons-outlined cursor-pointer select-none ${product.images.length < 7 && "pointer-events-none opacity-50"}`} onClick={() => setImgIndexTransform((prev) => prev - 1)}>
                                 arrow_back_ios
                             </span>
@@ -46,6 +46,26 @@ const DetailProduct = ({ product }: IProps) => {
                 </div>
                 <div className="mt-3">
                     <h2 className='text-4xl uppercase font-semibold'>{product.title}</h2>
+                    <h5 className='text-xl text-red-500 font-semibold'>${product.price}</h5>
+
+                    <div className="mx-0 flex justify-between">
+                        {
+                            product.inStock > 0 ? <h5 className='text-xl text-red-500 font-semibold'>In Stock: {product.inStock}</h5> : <h5 className='text-xl text-red-500 font-semibold'>Out Stock</h5>
+                        }
+
+                        <h5 className='text-xl text-red-500 font-semibold'>In Stock: {product.sold}</h5>
+                    </div>
+
+                    <div className="my-3">{product.description}</div>
+                    <div className="my-3">
+                        {product.content}
+                        {product.content}
+                        {product.content}
+                    </div>
+                
+                    <button className="btn px-10 my-3 text-xl">BUY</button>
+
+
                 </div>
             </div>
 
