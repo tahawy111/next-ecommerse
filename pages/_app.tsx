@@ -9,21 +9,12 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 // Others
 import type { AppProps } from "next/app";
-import Layout from "@/components/Layout";
 import { store } from "../store";
 import { Provider } from "react-redux";
 import Loading from "@/components/Loading";
 import { ToastContainer, Flip } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ChakraProvider } from "@chakra-ui/react";
-import { ThemeProvider } from "next-themes";
 
-// // material icons
-// import 'https://fonts.googleapis.com/icon?family=Material+Icons'
-// import 'https://fonts.googleapis.com/icon?family=Material+Icons+Outlined'
-// import 'https://fonts.googleapis.com/icon?family=Material+Icons+Round'
-// import 'https://fonts.googleapis.com/icon?family=Material+Icons+Sharp'
-// import 'https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

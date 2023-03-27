@@ -4,6 +4,9 @@ import { BASE_URL, capitalize } from '@/utils/globals';
 import axios from 'axios';
 import Head from 'next/head';
 import React, { useEffect, useRef, useState } from 'react';
+import { AppDispatch } from '@/store';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/slices/cartSlice';
 interface IProps {
     product: IProductModel;
 }
@@ -12,14 +15,11 @@ const DetailProduct = ({ product }: IProps) => {
     const [imgIndexTransform, setImgIndexTransform] = useState(0);
     const divImagesRef = useRef<HTMLImageElement>(null);
     const [imgsWidth, setImgsWidth] = useState<any>(null);
-
-    useEffect(() => {
-        console.log({ pro: product.images.length * 84, imgIndexTransform: imgIndexTransform * 84 });
-    }, [imgIndexTransform]);
+    const dispatch: AppDispatch = useDispatch();
     return (
         <Layout>
             <Head>
-                <title>Tahawy Shop - {capitalize(product.title)}</title>
+                <title>{`Tahawy Shop - ${product.title.toUpperCase()}`}</title>
                 <meta name="description" content="Product Page" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
@@ -63,7 +63,7 @@ const DetailProduct = ({ product }: IProps) => {
                         {product.content}
                     </div>
                 
-                    <button className="btn px-10 my-3 text-xl">BUY</button>
+                    <button className="btn px-10 my-3 text-xl" onClick={() => dispatch(addToCart({product}))}>BUY</button>
 
 
                 </div>

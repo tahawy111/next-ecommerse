@@ -12,7 +12,6 @@ interface IProps {
 }
 export default function Home(props:IProps){
     const [products, setProducts] = useState(props.products)
-    console.log(products)
     return (
         <>
             <Head>

@@ -20,6 +20,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
+  const { cartItems } = useSelector((state: RootState) => state.cart);
   const { isLoggedIn, userInfo } = useSelector((state: RootState) => state.auth);
   const isActive = (r: string): string => r === router.pathname ? "active" : "";
   const navLinks = (isLoggedIn ? 
@@ -27,7 +28,7 @@ const Navbar = () => {
           <li>{<ThemeChanger noCenter={isMenuOpen} />}</li>
       <li className="mx-1"><Link href="/cart"><span className="material-icons-outlined">
   shopping_cart
-  </span> Cart</Link></li>
+  </span> Cart <div className="badge badge-accent">{cartItems.length}</div></Link></li>
     <li>
     <div className="dropdown dropdown-end">
   <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -35,7 +36,7 @@ const Navbar = () => {
       <img src={userInfo?.user.avatar}/>
     </div>
   </label>
-  <ul tabIndex={0} className="mt-40 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+  <ul tabIndex={0} className="mt-48 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
     <li>
       <a className="justify-between">
         Profile
@@ -91,8 +92,6 @@ menu
 {isMenuOpen && <ul className="md:hidden menu px-1 fixed top-0 left-0 opacity-95 bg-white dark:bg-[#2a303c] w-80 md:w-96 rounded-lg shadow-md z-[9999]">
         {navLinks}
       </ul>}
- 
-
       </div>
     </div>
   )
