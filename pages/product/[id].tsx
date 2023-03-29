@@ -4,8 +4,8 @@ import { BASE_URL, capitalize } from '@/utils/globals';
 import axios from 'axios';
 import Head from 'next/head';
 import React, { useEffect, useRef, useState } from 'react';
-import { AppDispatch } from '@/store';
-import { useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '@/store';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '@/slices/cartSlice';
 interface IProps {
     product: IProductModel;
@@ -16,6 +16,11 @@ const DetailProduct = ({ product }: IProps) => {
     const divImagesRef = useRef<HTMLImageElement>(null);
     const [imgsWidth, setImgsWidth] = useState<any>(null);
     const dispatch: AppDispatch = useDispatch();
+    const { userInfo } = useSelector((state: RootState) => state.auth);
+   const AddToCart = () => {
+    dispatch(addToCart({ product, userId: userInfo ? userInfo.user._id : null }))
+   }
+   
     return (
         <Layout>
             <Head>
@@ -62,8 +67,8 @@ const DetailProduct = ({ product }: IProps) => {
                         {product.content}
                         {product.content}
                     </div>
-                
-                    <button className="btn px-10 my-3 text-xl" onClick={() => dispatch(addToCart({product}))}>BUY</button>
+
+                    <button className="btn px-10 my-3 text-xl" onClick={AddToCart}>BUY</button>
 
 
                 </div>
