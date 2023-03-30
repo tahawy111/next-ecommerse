@@ -1,12 +1,6 @@
 import "@/styles/globals.css";
-//theme
-import "primereact/resources/themes/lara-light-indigo/theme.css";
 
-//core
-import "primereact/resources/primereact.min.css";
 
-//icons
-import "primeicons/primeicons.css";
 // Others
 import type { AppProps } from "next/app";
 import { store } from "../store";
