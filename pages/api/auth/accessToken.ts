@@ -1,10 +1,10 @@
 import connectDB from "../../../utils/connectDB";
-import User from "../../../models/User";
 import { NextApiRequest, NextApiResponse } from "next";
 import jwt from "jsonwebtoken";
 import { IRefreshToken } from "@/utils/Typescript";
 import { generateAccessToken } from "@/utils/generateToken";
 import { getCookies } from "@/utils/getCookies";
+import User from "@/models/User"
 
 connectDB();
 
@@ -33,6 +33,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.json({
       accessToken,
       user: {
+        _id: user._id,
         name: user.name,
         email: user.email,
         role: user.role,

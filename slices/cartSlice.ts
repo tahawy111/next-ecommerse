@@ -10,7 +10,7 @@ import { IUserModel } from "@/models/User";
 import { IProductModel } from '@/models/Product';
 
 export interface CartState {
-    cartItems: { item: IProductModel, quantity: number; }[]
+    cartItems: { item: IProductModel, quantity: number; }[];
 }
 
 const initialState: CartState = {
@@ -19,23 +19,15 @@ const initialState: CartState = {
 
 const baseUrl = BASE_URL;
 
-// export const login = createAsyncThunk("auth/login", async (user : {
-//     email: string;
-//     password: string
-// }, thunkAPI) => {
-//     try {
-//         const res = await axios.post(`${baseUrl}/api/auth/login`, user);
+export const loggedInAddToCart = createAsyncThunk("cart/loggedInAddToCart", async (cart: {productId:string;userId:string | undefined}, thunkAPI) => {
+    try {
+        const res = await axios.post(`${baseUrl}/api/cart/addToCart`, cart);
+        return thunkAPI.fulfillWithValue(res.data);
+    } catch (error) {
+        return thunkAPI.rejectWithValue(getError(error));
+    }
+});
 
-//         localStorage.setItem("firstLogin", JSON.stringify(true));
-//         Cookies.set("refreshtoken", res.data.refresh_token, {
-//             expires: 7,
-//             path: "api/auth/accessToken"
-//         });
-//         return thunkAPI.fulfillWithValue(res.data);
-//     } catch (error) {
-//         return thunkAPI.rejectWithValue(getError(error));
-//     }
-// });
 
 export const cartSlice = createSlice({
     name: "cart",
@@ -43,9 +35,9 @@ export const cartSlice = createSlice({
     reducers: {
         addToCart: (state: CartState, action) => {
             const product: IProductModel = action.payload.product;
-            if(product.inStock < 1) {
-            toast.warning("This product is out of stock")
-            return;
+            if (product.inStock < 1) {
+                toast.warning("This product is out of stock");
+                return;
             }
             let indexOfProduct = -1;
             for (let i = 0; i < state.cartItems.length; i++) {
@@ -54,55 +46,44 @@ export const cartSlice = createSlice({
                     break;
                 }
             }
-            if (state.cartItems.length > 0 && state.cartItems[indexOfProduct] !== undefined && state.cartItems[indexOfProduct].item._id === product._id ) {
-                state.cartItems[indexOfProduct].quantity += 1 
+            if (state.cartItems.length > 0 && state.cartItems[indexOfProduct] !== undefined && state.cartItems[indexOfProduct].item._id === product._id) {
+                state.cartItems[indexOfProduct].quantity += 1;
             } else {
                 state.cartItems.push({ item: product, quantity: 1 });
             }
-            localStorage.setItem("cartItems",JSON.stringify(state.cartItems))
+            localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
             return state;
         },
         setCart: (state: CartState, action) => {
-            localStorage.cartItems = JSON.stringify(action.payload.cartItems)
-            return {...state,cartItems:action.payload.cartItems};
+            localStorage.cartItems = JSON.stringify(action.payload.cartItems);
+            return { ...state, cartItems: action.payload.cartItems };
         },
 
     },
-    // extraReducers: (builder : any) => {
-    //     builder.addCase(login.pending, (state : CartState) => {
-    //         return {
-    //             ...state,
-    //             loading: true,
-    //             isLoggedIn: false
-    //         };
-    //     });
-    //     builder.addCase(login.fulfilled, (state : CartState, action : any) => {
-    //         toast.success(action.payload.msg);
+    extraReducers: (builder: any) => {
+        builder.addCase(loggedInAddToCart.pending, (state: CartState) => {
+            return state;
 
-    //         return {
-    //             ...state,
-    //             isLoggedIn: true,
-    //             loading: false,
-    //             userInfo: {
-    //                 user: action.payload.user,
-    //                 access_token: action.payload.access_token
-    //             }
-    //         };
-    //     });
+        });
+        builder.addCase(loggedInAddToCart.fulfilled, (state: CartState, action: any) => {
 
-    //     builder.addCase(login.rejected, (state : CartState, action : any) => {
-    //         toast.error(action.payload);
-    //         return {
-    //             ...state,
-    //             loading: false,
-    //             msg: action.payload,
-    //             userInfo: null
-    //         };
-    //     });
-    // }
+            return {
+                ...state,
+                cartItems: action.payload.cartItems
+            };
+        });
+
+        builder.addCase(loggedInAddToCart.rejected, (state: CartState, action: any) => {
+            toast.error(action.payload);
+            return {
+                ...state,
+                cartItems:[]
+            };
+        });
+    }
 });
 
 // Action creators are generated for each case reducer function
-export const { addToCart,setCart } = cartSlice.actions;
+export const { addToCart, setCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

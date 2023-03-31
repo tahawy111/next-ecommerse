@@ -15,6 +15,8 @@ interface IProps {
 const Layout: React.FC<IProps> = ({ children }) => {
     const dispatch: AppDispatch = useDispatch();
     const cart = useSelector((state: RootState) => state.cart);
+    // const {isLoggedIn} = useSelector((state: RootState) => state.auth);
+
     const { cartItems } = cart;
     useEffect(() => {
         const fetchData = async () => {
@@ -32,6 +34,12 @@ const Layout: React.FC<IProps> = ({ children }) => {
 
         fetchData();
     }, [dispatch]);
+
+    // useEffect(() => {
+    //     if(isLoggedIn) {
+    //         localStorage.removeItem("cartItems")
+    //     }
+    // }, [isLoggedIn])
     
     return (
         <div>

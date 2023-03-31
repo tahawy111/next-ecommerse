@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react';
 import { FiMenu } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 import { AiOutlineShoppingCart } from "react-icons/ai";
@@ -23,55 +23,88 @@ const Navbar = () => {
   const { cartItems } = useSelector((state: RootState) => state.cart);
   const { isLoggedIn, userInfo } = useSelector((state: RootState) => state.auth);
   const isActive = (r: string): string => r === router.pathname ? "active" : "";
-  const navLinks = (isLoggedIn ? 
+  const navLinks = (isLoggedIn ?
     <>
-          <li>{<ThemeChanger noCenter={isMenuOpen} />}</li>
-      <li className="mx-1"><Link href="/cart"><span className="material-icons-outlined">
-  shopping_cart
-  </span> Cart <div className="badge badge-accent">{cartItems.length}</div></Link></li>
-    <li>
-    <div className="dropdown dropdown-end">
-  <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-    <div className="w-10 rounded-full">
-      <img src={userInfo?.user.avatar}/>
-    </div>
-  </label>
-  <ul tabIndex={0} className="mt-48 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-    <li>
-      <a className="justify-between">
-        Profile
-        <span className="badge">New</span>
-      </a>
-    </li>
-    <li><a>Settings</a></li>
-    <li onClick={() => {
-                Cookies.remove("refreshtoken", { path: "api/auth/accessToken" });
-                localStorage.removeItem("firstLogin");
-                dispatch(logout());
-                router.push("/signin");
-    } }><a>Logout</a></li>
-    
-  </ul>
-  
-  </div>
-    </li>
-<li>
-<span onClick={() => setIsMenuOpen((prev) => !prev)} className="block material-icons-outlined md:hidden cursor-pointer">
-close
-</span>
-</li>
-    </> : <>
-    <li>{<ThemeChanger  noCenter={isMenuOpen} />}</li>
-      <li><Link href={'/signin'}>Sign In</Link></li>
+      <li>{<ThemeChanger noCenter={isMenuOpen} />}</li>
+
+
+      {/* <li className="mx-1">
+
+        <Link href="/cart">
+          <span className="material-icons-outlined">
+        shopping_cart
+      </span>
+       Cart
+        <div className="badge badge-accent">{cartItems.length}</div>
+      </Link>
+
+      </li> */}
+
+
+
       <li>
-<span onClick={() => setIsMenuOpen((prev) => !prev)} className="block material-icons-outlined md:hidden cursor-pointer">
-close
-</span>
-</li>
-    </>)
+
+
+        <div className="dropdown dropdown-end">
+          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+            <div className="w-10 rounded-full">
+              <img src={userInfo?.user.avatar} />
+            </div>
+          </label>
+          <ul tabIndex={0} className="mt-48 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+            <li>
+              <a className="justify-between">
+                Profile
+                <span className="badge">New</span>
+              </a>
+            </li>
+            <li><a>Settings</a></li>
+            <li onClick={() => {
+              Cookies.remove("refreshtoken", { path: "api/auth/accessToken" });
+              localStorage.removeItem("firstLogin");
+              dispatch(logout());
+              router.push("/signin");
+            }}><a>Logout</a></li>
+
+          </ul>
+
+        </div>
+      </li>
+      <li>
+        <span onClick={() => setIsMenuOpen((prev) => !prev)} className="block material-icons-outlined md:hidden cursor-pointer">
+          close
+        </span>
+      </li>
+    </> : <>
+      <li>{<ThemeChanger noCenter={isMenuOpen} />}</li>
+      <li><Link href={'/signin'}>Sign In</Link></li>
+
+      <li>
+        <span onClick={() => setIsMenuOpen((prev) => !prev)} className="block material-icons-outlined md:hidden cursor-pointer">
+          close
+        </span>
+
+      </li>
+
+      <li className="mx-1">
+
+        <Link href="/cart">
+          <span className="material-icons-outlined">
+        shopping_cart
+      </span>
+       Cart
+        <div className="badge badge-accent">{cartItems.length}</div>
+      </Link>
+
+      </li>
+
+
+    </>
+
+  );
 
   return (
-  
+
 
     <div className={`navbar bg-base-100 shadow-md`}>
       <div className="navbar-start">
@@ -79,22 +112,22 @@ close
       </div>
       <div className="navbar-end">
 
-      {isMenuOpen ? <span onClick={() => setIsMenuOpen((prev) => !prev)} className="block material-icons-outlined md:hidden cursor-pointer">
-close
-</span> : <span onClick={() => setIsMenuOpen((prev) => !prev)} className="block material-icons-outlined md:hidden cursor-pointer">
-menu
-</span>}
+        {isMenuOpen ? <span onClick={() => setIsMenuOpen((prev) => !prev)} className="block material-icons-outlined md:hidden cursor-pointer">
+          close
+        </span> : <span onClick={() => setIsMenuOpen((prev) => !prev)} className="block material-icons-outlined md:hidden cursor-pointer">
+          menu
+        </span>}
 
-      <ul className="hidden menu menu-horizontal px-1 md:flex">
-        {navLinks}
-      </ul>
+        <ul className="hidden menu menu-horizontal px-1 md:flex">
+          {navLinks}
+        </ul>
 
-{isMenuOpen && <ul className="md:hidden menu px-1 fixed top-0 left-0 opacity-95 bg-white dark:bg-[#2a303c] w-80 md:w-96 rounded-lg shadow-md z-[9999]">
-        {navLinks}
-      </ul>}
+        {isMenuOpen && <ul className="md:hidden menu px-1 fixed top-0 left-0 opacity-95 bg-white dark:bg-[#2a303c] w-80 md:w-96 rounded-lg shadow-md z-[9999]">
+          {navLinks}
+        </ul>}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

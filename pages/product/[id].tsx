@@ -6,7 +6,7 @@ import Head from 'next/head';
 import React, { useEffect, useRef, useState } from 'react';
 import { AppDispatch, RootState } from '@/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '@/slices/cartSlice';
+import { addToCart, loggedInAddToCart } from '@/slices/cartSlice';
 interface IProps {
     product: IProductModel;
 }
@@ -16,11 +16,18 @@ const DetailProduct = ({ product }: IProps) => {
     const divImagesRef = useRef<HTMLImageElement>(null);
     const [imgsWidth, setImgsWidth] = useState<any>(null);
     const dispatch: AppDispatch = useDispatch();
-    const { userInfo } = useSelector((state: RootState) => state.auth);
-   const AddToCart = () => {
-    dispatch(addToCart({ product, userId: userInfo ? userInfo.user._id : null }))
-   }
-   
+    const { userInfo, isLoggedIn } = useSelector((state: RootState) => state.auth);
+
+
+    const AddToCart = () => {
+        if (isLoggedIn) {
+            localStorage.removeItem("cartItems");
+            dispatch(loggedInAddToCart({ productId: product._id, userId: userInfo?.user._id }));
+        } else {
+            dispatch(addToCart({ product }));
+        }
+    };
+
     return (
         <Layout>
             <Head>

@@ -1,8 +1,9 @@
 import { Model, Schema, model, models } from "mongoose";
+import { IProductModel } from '@/models/Product';
 
 export interface ICartModel {
     _id: string;
-    cartItems: string[];
+    cartItems: {_id:string | IProductModel | any,quantity:number}[];
     // totalQuantity: number;
     // totalPrice: number;
 }

@@ -1,12 +1,12 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import type {PayloadAction}
-from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction }
+    from "@reduxjs/toolkit";
 import axios from "axios";
-import {BASE_URL} from "@/utils/globals";
-import {getError} from "@/utils/error";
-import {toast} from "react-toastify";
+import { BASE_URL } from "@/utils/globals";
+import { getError } from "@/utils/error";
+import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import {IUserModel} from "@/models/User";
+import { IUserModel } from "@/models/User";
 
 export interface AuthState {
     loading: boolean;
@@ -27,9 +27,9 @@ const initialState: AuthState = {
 
 const baseUrl = BASE_URL;
 
-export const login = createAsyncThunk("auth/login", async (user : {
+export const login = createAsyncThunk("auth/login", async (user: {
     email: string;
-    password: string
+    password: string;
 }, thunkAPI) => {
     try {
         const res = await axios.post(`${baseUrl}/api/auth/login`, user);
@@ -49,7 +49,7 @@ export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        setUser: (state : AuthState, action : any) => {
+        setUser: (state: AuthState, action: any) => {
             return {
                 ...state,
                 isLoggedIn: true,
@@ -59,7 +59,7 @@ export const authSlice = createSlice({
                 }
             };
         },
-        logout: (state : AuthState) => {
+        logout: (state: AuthState) => {
             return {
                 ...state,
                 isLoggedIn: false,
@@ -67,15 +67,15 @@ export const authSlice = createSlice({
             };
         }
     },
-    extraReducers: (builder : any) => {
-        builder.addCase(login.pending, (state : AuthState) => {
+    extraReducers: (builder: any) => {
+        builder.addCase(login.pending, (state: AuthState) => {
             return {
                 ...state,
                 loading: true,
                 isLoggedIn: false
             };
         });
-        builder.addCase(login.fulfilled, (state : AuthState, action : any) => {
+        builder.addCase(login.fulfilled, (state: AuthState, action: any) => {
             toast.success(action.payload.msg);
 
             return {
@@ -89,7 +89,7 @@ export const authSlice = createSlice({
             };
         });
 
-        builder.addCase(login.rejected, (state : AuthState, action : any) => {
+        builder.addCase(login.rejected, (state: AuthState, action: any) => {
             toast.error(action.payload);
             return {
                 ...state,
@@ -102,6 +102,6 @@ export const authSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const {setUser, logout} = authSlice.actions;
+export const { setUser, logout } = authSlice.actions;
 
 export default authSlice.reducer;
