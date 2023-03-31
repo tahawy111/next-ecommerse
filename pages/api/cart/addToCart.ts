@@ -27,7 +27,7 @@ const addToCart = async (req: NextApiRequest, res: NextApiResponse) => {
     if (cart) {
       let indexOfProduct = -1;
       for (let i = 0; i < cart.cartItems.length; i++) {
-        if (req.body.productId === cart.cartItems[i]._id) {
+        if (req.body.productId === `${cart.cartItems[i]._id}`) {
           indexOfProduct = i;
           break;
         }
@@ -40,17 +40,30 @@ const addToCart = async (req: NextApiRequest, res: NextApiResponse) => {
         await Cart.findByIdAndUpdate(req.body.userId, { $set: cart });
 
         const cartItmes = await Cart.aggregate([
+          { $match: { _id: new mongoose.Types.ObjectId(req.body.userId) } },
           {
             $lookup: {
               from: "products", // here you put the full collection name
               localField: "cartItems._id",
               foreignField: "_id",
-              as: "cartItems", // here you put the name of the input field
+              as: "output", // here you put the name of the input field
             },
           },
+
+          {
+            $addFields: {
+              "output.quantity": "$cartItems.quantity"
+            }
+          },
+
         ]);
 
-        console.log(cartItmes);
+        for (let i = 0; i < cartItmes[0].output.length; i++) {
+          cartItmes[0].output[i].quantity = cartItmes[0].output[i].quantity[0];
+        }
+        
+        delete cartItmes[0].cartItems
+
         return res.json({ cartItmes });
       }
 
@@ -61,7 +74,7 @@ const addToCart = async (req: NextApiRequest, res: NextApiResponse) => {
       const newCart = new Cart({ _id: req.body.userId, cartItems: [{ _id: req.body.productId, quantity: 1 }] });
 
 
-      const savedCart = await newCart.save();
+      await newCart.save();
       const cartItmes = await Cart.aggregate([
         { $match: { _id: new mongoose.Types.ObjectId(req.body.userId) } },
         {
@@ -69,10 +82,17 @@ const addToCart = async (req: NextApiRequest, res: NextApiResponse) => {
             from: "products", // here you put the full collection name
             localField: "cartItems._id",
             foreignField: "_id",
-            as: "cartItems", // here you put the name of the input field
+            as: "output", // here you put the name of the input field
           },
-
         },
+
+        {
+          $addFields: {
+            "output.quantity": "$cartItems.quantity"
+          }
+        },
+
+
         // {
         //   $addFields: {
         //     "cartItems.quantity": "$cartItems.quantity",
@@ -82,7 +102,7 @@ const addToCart = async (req: NextApiRequest, res: NextApiResponse) => {
 
       console.log(cartItmes);
 
-      res.json({ cart: savedCart, cartItmes });
+      res.json({ cartItmes });
 
     }
 

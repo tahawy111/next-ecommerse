@@ -3,7 +3,7 @@ import { IProductModel } from '@/models/Product';
 
 export interface ICartModel {
     _id: string;
-    cartItems: { _id: string | IProductModel | any, quantity: number; }[];
+    cartItems: { _id: string ; quantity: number; }[];
     // totalQuantity: number;
     // totalPrice: number;
 }
