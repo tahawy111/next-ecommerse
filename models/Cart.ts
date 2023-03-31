@@ -3,7 +3,7 @@ import { IProductModel } from '@/models/Product';
 
 export interface ICartModel {
     _id: string;
-    cartItems: {_id:string | IProductModel | any,quantity:number}[];
+    cartItems: { _id: string | IProductModel | any, quantity: number; }[];
     // totalQuantity: number;
     // totalPrice: number;
 }
@@ -12,8 +12,8 @@ type CartModel = Model<ICartModel, {}>;
 
 const cartSchema = new Schema(
     {
-        _id: { required: true, type: String },
-        cartItems: { type: Array, required: true },
+        _id: { type: Schema.Types.ObjectId, required: true },
+        cartItems: [{ _id: { type: Schema.Types.ObjectId, required: true }, quantity: { type: Number, required: true } }],
         // totalQuantity: { required: true, type: Number },
         // totalPrice: { required: true, type: Number },
     },

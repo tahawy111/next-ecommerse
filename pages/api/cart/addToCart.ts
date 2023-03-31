@@ -40,21 +40,15 @@ const addToCart = async (req: NextApiRequest, res: NextApiResponse) => {
         await Cart.findByIdAndUpdate(req.body.userId, { $set: cart });
 
         const cartItmes = await Cart.aggregate([
-           {$unwind:"$cartItems"},
-                {
-                  $lookup: {
-                    from: "products", // here you put the full collection name
-                    let: { user_id: "$cartItems._id" },
-                    pipeline: [
-                      { $match: { $expr: { $eq: ["$_id", "$$user_id"] } } },
-                    ],
-                    as: "user", // here you put the name of the input field
-                  },
-                },
-  
-                // array -> object
-                { $unwind: "$user" },
-              ]);
+          {
+            $lookup: {
+              from: "products", // here you put the full collection name
+              localField: "cartItems._id",
+              foreignField: "_id",
+              as: "cartItems", // here you put the name of the input field
+            },
+          },
+        ]);
 
         console.log(cartItmes);
         return res.json({ cartItmes });
@@ -64,13 +58,31 @@ const addToCart = async (req: NextApiRequest, res: NextApiResponse) => {
 
     } else {
 
-      const newCart = new Cart({ _id: req.body.userId, cartItems: [] });
+      const newCart = new Cart({ _id: req.body.userId, cartItems: [{ _id: req.body.productId, quantity: 1 }] });
 
-      newCart.cartItems.push({ _id: req.body.productId, quantity: 1 });
 
       const savedCart = await newCart.save();
+      const cartItmes = await Cart.aggregate([
+        { $match: { _id: new mongoose.Types.ObjectId(req.body.userId) } },
+        {
+          $lookup: {
+            from: "products", // here you put the full collection name
+            localField: "cartItems._id",
+            foreignField: "_id",
+            as: "cartItems", // here you put the name of the input field
+          },
 
-      res.json({ cart: savedCart });
+        },
+        // {
+        //   $addFields: {
+        //     "cartItems.quantity": "$cartItems.quantity",
+        //   }
+        // }
+      ]);
+
+      console.log(cartItmes);
+
+      res.json({ cart: savedCart, cartItmes });
 
     }
 
