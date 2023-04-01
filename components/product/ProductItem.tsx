@@ -30,7 +30,7 @@ const ProductItem = ({ product }: IProps, ...props: any[]) => {
                         <h6 className='text-error'>${product.price}</h6>
                         {
                             product.inStock > 0
-                                ? <h6 className='text-error'>In Stock: {product.price}</h6>
+                                ? <h6 className='text-error'>In Stock: {product.inStock}</h6>
                                 : <h6 className='text-error'>Out Stock</h6>
                         }
                     </div>

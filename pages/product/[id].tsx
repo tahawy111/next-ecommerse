@@ -65,7 +65,7 @@ const DetailProduct = ({ product }: IProps) => {
                             product.inStock > 0 ? <h5 className='text-xl text-red-500 font-semibold'>In Stock: {product.inStock}</h5> : <h5 className='text-xl text-red-500 font-semibold'>Out Stock</h5>
                         }
 
-                        <h5 className='text-xl text-red-500 font-semibold'>In Stock: {product.sold}</h5>
+                        <h5 className='text-xl text-red-500 font-semibold'>Sold: {product.sold}</h5>
                     </div>
 
                     <div className="my-3">{product.description}</div>
